@@ -1,3 +1,5 @@
+// change usecdn to true! in client.js once done
+
 import { About, Footer, Header, Skills, Testimonial, Work } from './container';
 import { Navbar } from './components';
 import './App.scss';
