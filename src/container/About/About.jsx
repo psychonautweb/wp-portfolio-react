@@ -26,12 +26,7 @@ const abouts = [
 const About = () => {
   return (
     <React.Fragment>
-      <h2 className="head-text">
-        I know that <span>Good Design</span>
-        <br />
-        means
-        <span>Good Business</span>
-      </h2>
+      <h2 className="head-text">I know that <span>Good Apps</span><br /> means <span>Good Business</span></h2>
 
       <div className="app__profiles">
         {abouts.map((about, index) => (
