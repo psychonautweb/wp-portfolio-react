@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AiFillEye, AiFillGithub } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
-import { AppWrap } from '../../wrapper';
+import { AppWrap, MotionWrap } from '../../wrapper';
 import { urlFor, client } from '../../client';
 import './Work.scss';
 
@@ -21,7 +21,20 @@ const Work = () => {
     });
   }, []);
 
-  const handleWorkFilter = (item) => {};
+  const handleWorkFilter = (item) => {
+    setActiveFilter(item);
+    setAnimateCard([{ y: 100, opacity: 0}]);
+
+    setTimeout(() => {
+      setAnimateCard([{ y: 0, opacity: 1}]);
+
+      if(item === 'All') {
+        setFilterWork(works)
+      } else {
+        setFilterWork(works.filter((work) => work.tags.includes(item)))
+      }
+    }, 500);
+  };
 
   return (
     <React.Fragment>
@@ -35,7 +48,7 @@ const Work = () => {
             <div
               key={index}
               onClick={() => handleWorkFilter(item)}
-              className={`app__work-filter app__flex p-text ${
+              className={`app__work-filter-item app__flex p-text ${
                 activeFilter === item ? 'item-active' : ''
               }`}
             >
@@ -106,4 +119,8 @@ const Work = () => {
   );
 };
 
-export default AppWrap(Work, 'work');
+export default AppWrap(
+  MotionWrap(Work, 'app__works'), 
+  'work',
+  'app__primarybg'
+  );
